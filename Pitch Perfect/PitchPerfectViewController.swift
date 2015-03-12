@@ -52,7 +52,7 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
     @IBAction func recordAudio(sender: UIButton) {
         recordAudioButton.enabled = false
         stopButton.hidden = false
-        recordingLabel.hidden = false
+        recordingLabel.text = "Recording..."
         
         if recordedAudio != nil {
             var error: NSError?
@@ -95,8 +95,8 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
     
     @IBAction func stopRecordingAudio(sender: UIButton) {
         recordAudioButton.enabled = true
-        recordingLabel.hidden = true
         stopButton.hidden = true
+        recordingLabel.text = "Tap to record"
         
         audioRecorder.stop()
     }

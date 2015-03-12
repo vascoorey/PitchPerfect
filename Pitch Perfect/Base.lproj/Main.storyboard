@@ -35,8 +35,8 @@
                                     <action selector="stopRecordingAudio:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fK1-fr-cx1"/>
                                 </connections>
                             </button>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recording" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHn-OS-ifj">
-                                <rect key="frame" x="264" y="358" width="73" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap to record" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LHn-OS-ifj">
+                                <rect key="frame" x="249" y="358" width="102" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
@@ -121,19 +121,41 @@
                                     <action selector="playDarthVaderAudio:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="Jhy-W2-HMS"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ba-u7-0ex">
+                                <rect key="frame" x="46" y="414" width="35" height="30"/>
+                                <state key="normal" title="Echo">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="echoButtonTapped:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="1ii-ak-tD7"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qch-wr-ttf">
+                                <rect key="frame" x="505" y="414" width="49" height="30"/>
+                                <state key="normal" title="Reverb">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="reverbButtonTapped:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="Fnf-8h-Bzg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Asm-DL-dXa" firstAttribute="top" secondItem="tdA-rH-x7K" secondAttribute="bottom" constant="50" id="1fG-vK-hdB"/>
                             <constraint firstAttribute="centerX" secondItem="oZ5-d1-rmn" secondAttribute="centerX" id="8HB-Y7-1M5"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qch-wr-ttf" secondAttribute="trailing" constant="30" id="9lK-LO-6Ck"/>
                             <constraint firstItem="gbg-Wh-k0R" firstAttribute="top" secondItem="oZ5-d1-rmn" secondAttribute="bottom" constant="50" id="Ayn-wW-AsU"/>
                             <constraint firstItem="Asm-DL-dXa" firstAttribute="leading" secondItem="2S2-QA-Geu" secondAttribute="leadingMargin" constant="30" id="Cae-ML-CPw"/>
                             <constraint firstItem="U7Q-Sk-ZFd" firstAttribute="top" secondItem="Fed-I5-qMn" secondAttribute="bottom" constant="50" id="NTs-ZX-3Gw"/>
                             <constraint firstItem="Fed-I5-qMn" firstAttribute="top" secondItem="tdA-rH-x7K" secondAttribute="bottom" constant="50" id="PX6-y7-OB7"/>
+                            <constraint firstItem="qch-wr-ttf" firstAttribute="top" secondItem="U7Q-Sk-ZFd" secondAttribute="bottom" constant="50" id="QE3-cm-fjX"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Fed-I5-qMn" secondAttribute="trailing" constant="30" id="XYl-6U-PxP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="U7Q-Sk-ZFd" secondAttribute="trailing" constant="30" id="b58-Kx-1Qp"/>
+                            <constraint firstItem="6ba-u7-0ex" firstAttribute="top" secondItem="0V7-wf-aU4" secondAttribute="bottom" constant="50" id="fbI-gG-WTo"/>
                             <constraint firstItem="0V7-wf-aU4" firstAttribute="top" secondItem="Asm-DL-dXa" secondAttribute="bottom" constant="50" id="hkz-x8-G9P"/>
                             <constraint firstItem="0V7-wf-aU4" firstAttribute="leading" secondItem="2S2-QA-Geu" secondAttribute="leadingMargin" constant="30" id="iMd-5W-6E2"/>
+                            <constraint firstItem="6ba-u7-0ex" firstAttribute="leading" secondItem="2S2-QA-Geu" secondAttribute="leadingMargin" constant="30" id="yb6-wF-B8x"/>
                         </constraints>
                     </view>
                     <connections>

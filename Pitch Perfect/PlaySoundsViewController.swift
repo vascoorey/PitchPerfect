@@ -78,31 +78,77 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         audioPlayer.play()
     }
     
+    @IBAction func reverbButtonTapped(sender: UIButton) {
+        playAudioWithReverb()
+    }
+    
+    @IBAction func echoButtonTapped(sender: UIButton) {
+        playAudioWithEcho()
+    }
+    
     
     //MARK: Audio Methods
     
     
     func playAudioWithVariablePitch(pitch: Float) {
+        let changePitchEffect = AVAudioUnitTimePitch()
+        changePitchEffect.pitch = pitch
+        
+        playAudioWithEffects([changePitchEffect])
+    }
+    
+    
+    func playAudioWithReverb() {
+        let reverbEffect = AVAudioUnitReverb()
+        reverbEffect.loadFactoryPreset(.Cathedral)
+        
+        reverbEffect.wetDryMix = 75;
+        
+        playAudioWithEffects([reverbEffect])
+    }
+    
+    func playAudioWithEcho() {
+        let delayEffect = AVAudioUnitDelay()
+        delayEffect.feedback = 75
+        delayEffect.wetDryMix = 75
+        
+        let reverbEffect = AVAudioUnitReverb()
+        reverbEffect.loadFactoryPreset(.Cathedral)
+        
+        reverbEffect.wetDryMix = 75;
+        
+        playAudioWithEffects([delayEffect, reverbEffect])
+    }
+    
+    func playAudioWithEffects(effects: [AVAudioUnit]) {
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()
         
         let audioPlayerNode = AVAudioPlayerNode()
-        audioPlayerNode.volume = 10
+        audioPlayerNode.volume = 100
         audioEngine.attachNode(audioPlayerNode)
         
-        let changePitchEffect = AVAudioUnitTimePitch()
-        changePitchEffect.pitch = pitch
-        audioEngine.attachNode(changePitchEffect)
+        // Apply effects
+        var previousEffect: AVAudioUnit! = nil
         
-        audioEngine.connect(audioPlayerNode, to: changePitchEffect, format: nil)
-        audioEngine.connect(changePitchEffect, to: audioEngine.outputNode, format: nil)
+        for unit in effects {
+            audioEngine.attachNode(unit);
+            
+            if previousEffect == nil {
+                audioEngine.connect(audioPlayerNode, to: unit, format: nil)
+            } else {
+                audioEngine.connect(previousEffect, to: unit, format: nil)
+            }
+            
+            previousEffect = unit
+        }
+        
+        audioEngine.connect(previousEffect, to: audioEngine.outputNode, format: nil)
         
         audioPlayerNode.scheduleFile(audioFile, atTime: nil, completionHandler:nil)
         audioEngine.startAndReturnError(nil)
         
         audioPlayerNode.play()
     }
-    
-    
 }
