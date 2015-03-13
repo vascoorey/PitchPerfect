@@ -12,7 +12,7 @@ import AVFoundation
 class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
 
 
-    //MARK: Properties
+    //MARK: - Properties
     
     
     var recordedAudio: RecordedAudio!
@@ -24,13 +24,13 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     var audioEngine: AVAudioEngine!
     
     
-    //MARK: Outlets
+    //MARK: - Outlets
     
     
     @IBOutlet weak var stopButton: UIButton!
     
     
-    //MARK: View Controller Lifecycle
+    //MARK: - View Controller Lifecycle
     
     
     override func viewDidLoad() {
@@ -50,7 +50,7 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     
-    //MARK: Target Actions
+    //MARK: - Target Actions
     
     
     @IBAction func playChipmunkAudio(sender: UIButton) {
@@ -68,12 +68,14 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     
     @IBAction func fastButtonTapped(sender: UIButton) {
         audioPlayer.stop()
+        audioEngine.stop()
         audioPlayer.rate = 2.0
         audioPlayer.play()
     }
     
     @IBAction func slowButtonTapped(sender: UIButton) {
         audioPlayer.stop()
+        audioEngine.stop()
         audioPlayer.rate = 0.5
         audioPlayer.play()
     }
@@ -87,7 +89,7 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
     }
     
     
-    //MARK: Audio Methods
+    //MARK: - Audio Methods
     
     
     func playAudioWithVariablePitch(pitch: Float) {

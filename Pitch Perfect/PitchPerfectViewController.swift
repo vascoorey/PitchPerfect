@@ -12,7 +12,7 @@ import AVFoundation
 class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
     
     
-    //MARK: Properties
+    //MARK: - Properties
     
     
     var audioRecorder: AVAudioRecorder!
@@ -22,7 +22,7 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
     let playSoundsSegueIdentifier = "ShowPlaySoundsViewController"
     
     
-    //MARK: Outlets
+    //MARK: - Outlets
     
     
     @IBOutlet weak var stopButton: UIButton!
@@ -32,7 +32,7 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var recordAudioButton: UIButton!
     
     
-    //MARK: Segue
+    //MARK: - Segue
     
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -46,14 +46,14 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     
-    //MARK: Target Actions
+    //MARK: - Target Actions
     
     
     @IBAction func recordAudio(sender: UIButton) {
         recordAudioButton.enabled = false
         stopButton.hidden = false
         recordingLabel.text = "Recording..."
-        
+
         if recordedAudio != nil {
             var error: NSError?
             
@@ -72,8 +72,6 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
         formatter.dateFormat = "ddMMyyyy-HHmmss"
         let recordingName = formatter.stringFromDate(currentDate)+".wav"
         let filePath = NSURL.fileURLWithPathComponents([dirPath, recordingName])
-        
-        println(filePath)
         
         // Setup Audio Session
         let session = AVAudioSession.sharedInstance()
@@ -102,7 +100,7 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     
-    //MARK: AVAudioRecorderDelegate
+    //MARK: - AVAudioRecorderDelegate
     
     
     func audioRecorderDidFinishRecording(recorder: AVAudioRecorder!, successfully flag: Bool) {

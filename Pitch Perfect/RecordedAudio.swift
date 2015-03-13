@@ -11,7 +11,7 @@ import Foundation
 class RecordedAudio {
     
     
-    //MARK: Properties
+    //MARK: - Properties
     
     
     var title: String
@@ -19,7 +19,7 @@ class RecordedAudio {
     var filePath: NSURL
     
     
-    //MARK: Constructor
+    //MARK: - Constructor
     
     
     init(title: String, filePath: NSURL) {
