@@ -49,6 +49,13 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        audioPlayer.stop()
+        audioEngine.stop()
+    }
+    
     
     //MARK: - Target Actions
     
@@ -61,36 +68,38 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         playAudioWithVariablePitch(-1000)
     }
     
-    @IBAction func stopButtonTapped(sender: UIButton) {
+    @IBAction func stopPlayingAudio(sender: UIButton) {
         audioPlayer.stop()
         audioEngine.stop()
     }
     
-    @IBAction func fastButtonTapped(sender: UIButton) {
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioPlayer.rate = 2.0
-        audioPlayer.play()
+    @IBAction func playFastAudio(sender: UIButton) {
+        playAudioWithVariableRate(2.0)
     }
     
-    @IBAction func slowButtonTapped(sender: UIButton) {
-        audioPlayer.stop()
-        audioEngine.stop()
-        audioPlayer.rate = 0.5
-        audioPlayer.play()
+    @IBAction func playSlowAudio(sender: UIButton) {
+        playAudioWithVariableRate(0.5)
     }
     
-    @IBAction func reverbButtonTapped(sender: UIButton) {
+    @IBAction func playAudioWithReverb(sender: UIButton) {
         playAudioWithReverb()
     }
     
-    @IBAction func echoButtonTapped(sender: UIButton) {
+    @IBAction func playAudioWithEcho(sender: UIButton) {
         playAudioWithEcho()
     }
     
     
     //MARK: - Audio Methods
     
+    
+    func playAudioWithVariableRate(rate: Float) {
+        audioPlayer.stop()
+        audioEngine.stop()
+        audioPlayer.rate = rate
+        audioPlayer.play()
+
+    }
     
     func playAudioWithVariablePitch(pitch: Float) {
         let changePitchEffect = AVAudioUnitTimePitch()
@@ -109,6 +118,9 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         playAudioWithEffects([reverbEffect])
     }
     
+    /**
+    Plays audio with an echo effect, which is, in essence, a delay + reverb
+    */
     func playAudioWithEcho() {
         let delayEffect = AVAudioUnitDelay()
         delayEffect.feedback = 75
@@ -122,7 +134,14 @@ class PlaySoundsViewController: UIViewController, AVAudioPlayerDelegate {
         playAudioWithEffects([delayEffect, reverbEffect])
     }
     
+    /**
+    Plays audio with the given effects. They will be chained in the order in which they are passed in the effects array.
+    
+    :param: effects The AVAudioUnit instances that should be chained. This array should contain at least 1 instance of an AVAudioSubclass
+    */
     func playAudioWithEffects(effects: [AVAudioUnit]) {
+        assert(effects.count > 0)
+        
         audioPlayer.stop()
         audioEngine.stop()
         audioEngine.reset()

@@ -41,12 +41,23 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yaH-jq-GKz">
+                                <rect key="frame" x="277" y="285" width="50" height="50"/>
+                                <state key="normal" image="pause">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pauseRecording:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bg8-x3-9Bb"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.047058823529411764" green="0.40392156862745099" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="centerY" secondItem="f3C-XZ-ofD" secondAttribute="centerY" id="H1Z-iL-e23"/>
+                            <constraint firstItem="yaH-jq-GKz" firstAttribute="centerY" secondItem="f3C-XZ-ofD" secondAttribute="centerY" constant="10" id="JAU-nS-9o9"/>
                             <constraint firstAttribute="centerX" secondItem="q5S-FN-wVu" secondAttribute="centerX" id="Tus-H0-OiE"/>
                             <constraint firstAttribute="centerX" secondItem="LHn-OS-ifj" secondAttribute="centerX" id="U4h-CO-JrO"/>
+                            <constraint firstItem="yaH-jq-GKz" firstAttribute="centerX" secondItem="f3C-XZ-ofD" secondAttribute="centerX" constant="2" id="aGF-Dj-vzX"/>
                             <constraint firstAttribute="centerX" secondItem="f3C-XZ-ofD" secondAttribute="centerX" id="auZ-XR-CPk"/>
                             <constraint firstItem="q5S-FN-wVu" firstAttribute="top" secondItem="f3C-XZ-ofD" secondAttribute="bottom" constant="120" id="tG1-wH-sJf"/>
                             <constraint firstItem="LHn-OS-ifj" firstAttribute="top" secondItem="f3C-XZ-ofD" secondAttribute="bottom" constant="8" id="xal-9j-NpS"/>
@@ -54,6 +65,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Record" id="Rcc-G2-Gvk"/>
                     <connections>
+                        <outlet property="pauseRecordingButton" destination="yaH-jq-GKz" id="uPg-0H-tqA"/>
                         <outlet property="recordAudioButton" destination="f3C-XZ-ofD" id="atM-E4-qVb"/>
                         <outlet property="recordingLabel" destination="LHn-OS-ifj" id="Qqa-Yu-7Eh"/>
                         <outlet property="stopButton" destination="q5S-FN-wVu" id="Hw5-po-G3f"/>
@@ -62,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1232" y="-240"/>
+            <point key="canvasLocation" x="1262" y="-248"/>
         </scene>
         <!--Play Sounds View Controller-->
         <scene sceneID="0Uf-Ke-TV4">
@@ -82,7 +94,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="slowButtonTapped:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="xvx-fV-Ha0"/>
+                                    <action selector="playSlowAudio:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="HoW-yW-qmm"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fed-I5-qMn">
@@ -91,7 +103,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="fastButtonTapped:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="buu-EV-0Ty"/>
+                                    <action selector="playFastAudio:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="dLy-CX-hQy"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oZ5-d1-rmn">
@@ -100,7 +112,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="stopButtonTapped:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="wJo-X9-zIW"/>
+                                    <action selector="stopPlayingAudio:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="OXu-LQ-JJH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0V7-wf-aU4">
@@ -127,7 +139,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="echoButtonTapped:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="1ii-ak-tD7"/>
+                                    <action selector="playAudioWithEcho:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="Fqy-q5-FOr"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qch-wr-ttf">
@@ -136,7 +148,7 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="reverbButtonTapped:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="Fnf-8h-Bzg"/>
+                                    <action selector="playAudioWithReverb:" destination="dDJ-uQ-HOx" eventType="touchUpInside" id="VUY-k3-3WV"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -191,6 +203,7 @@
         <image name="echo" width="80" height="80"/>
         <image name="fast" width="100" height="100"/>
         <image name="microphone" width="100" height="100"/>
+        <image name="pause" width="50" height="50"/>
         <image name="reverb" width="80" height="80"/>
         <image name="slow" width="100" height="100"/>
         <image name="stop" width="50" height="50"/>

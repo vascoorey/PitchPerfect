@@ -21,6 +21,8 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
     
     let playSoundsSegueIdentifier = "ShowPlaySoundsViewController"
     
+    var isPaused = false
+    
     
     //MARK: - Outlets
     
@@ -30,6 +32,8 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
     @IBOutlet weak var recordingLabel: UILabel!
     
     @IBOutlet weak var recordAudioButton: UIButton!
+    
+    @IBOutlet weak var pauseRecordingButton: UIButton!
     
     
     //MARK: - Segue
@@ -50,9 +54,19 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
     
     
     @IBAction func recordAudio(sender: UIButton) {
-        recordAudioButton.enabled = false
+        recordAudioButton.hidden = true
+        pauseRecordingButton.hidden = false
         stopButton.hidden = false
-        recordingLabel.text = "Recording..."
+        recordingLabel.text = "Recording... Tap to pause."
+        
+        // If we were paused then we can simply call -record() on out audio recorder and return.
+        if isPaused {
+            audioRecorder.record()
+            
+            isPaused = false
+            
+            return
+        }
 
         if recordedAudio != nil {
             var error: NSError?
@@ -91,10 +105,23 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
         }
     }
     
+    @IBAction func pauseRecording(sender: UIButton) {
+        pauseRecordingButton.hidden = true
+        recordAudioButton.hidden = false
+        recordingLabel.text = "Paused... Tap to resume recording."
+        isPaused = true
+
+        audioRecorder.pause()
+    }
+    
     @IBAction func stopRecordingAudio(sender: UIButton) {
-        recordAudioButton.enabled = true
+        pauseRecordingButton.hidden = true
+        recordAudioButton.hidden = false
         stopButton.hidden = true
         recordingLabel.text = "Tap to record"
+        
+        // Reset `isPaused` to false so we don't run into any unexpected state when returning to this view controller.
+        isPaused = false
         
         audioRecorder.stop()
     }
@@ -114,6 +141,7 @@ class PitchPerfectViewController: UIViewController, AVAudioRecorderDelegate {
             recordAudioButton.enabled = true
             stopButton.hidden = false
             recordingLabel.hidden = false
+            isPaused = false
         }
     }
 }
